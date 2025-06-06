@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- Add this right after the opening <body> tag -->
+<div class="starfield"></div>
+
+<!-- Add this CSS to your styles -->
+<style>
+    .starfield {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        overflow: hidden;
+    }
+
+    .star {
+        position: absolute;
+        background-color: white;
+        border-radius: 50%;
+        animation: twinkle var(--duration) infinite ease-in-out;
+        opacity: 0;
+    }
+
+    @keyframes twinkle {
+        0%, 100% { opacity: 0; }
+        50% { opacity: var(--opacity); }
+    }
+</style>
+
+<!-- Add this JavaScript -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const starfield = document.querySelector('.starfield');
+        const starCount = 400;
+        
+        // Create stars
+        for (let i = 0; i < starCount; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            
+            // Random properties for each star
+            const size = Math.random() * 5;
+            const x = Math.random() * 100;
+            const y = Math.random() * 100;
+            const duration = 2 + Math.random() * 5;
+            const delay = Math.random() * 5;
+            const opacity = 0.2 + Math.random() * 0.8;
+            
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            star.style.left = `${x}%`;
+            star.style.top = `${y}%`;
+            star.style.setProperty('--duration', `${duration}s`);
+            star.style.setProperty('--opacity', opacity);
+            star.style.animationDelay = `${delay}s`;
+            
+            starfield.appendChild(star);
+        }
+    });
+</script>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kylion | Professional Sound Designer and Engineer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --black: #000000;
+            --dark: #121212;
+            --darker: #1E1E1E;
+            --accent: #00FF9D;
+            --text: #F5F5F5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--black);
+            color: var(--text);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Particle.js Background */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            top: 0;
+            left: 0;
+        }
+
+        /* Navigation */
+        .nav-container {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container.scrolled {
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            color: var(--accent);
+            letter-spacing: 2px;
+            text-decoration: none;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 2px;
+            background-color: var(--accent);
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            letter-spacing: 1px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            position: fixed;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: all 0.1s ease;
+        }
+
+        .cursor-grow {
+            transform: translate(-50%, -50%) scale(1.5);
+            background-color: var(--accent);
+            opacity: 0.5;
+        }
+
+        /* Sections */
+        section {
+            min-height: 100vh;
+            padding: 5rem 3rem;
+            position: relative;
+        }
+
+        /* Landing Page */
+        #landing {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .landing-content {
+            z-index: 1;
+        }
+
+        .landing-content h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 6rem;
+            letter-spacing: 5px;
+            margin-bottom: 1rem;
+            color: var(--accent);
+            text-shadow: 0 0 10px rgba(0, 255, 157, 0.5);
+        }
+
+        .landing-content h2 {
+            font-size: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-bottom: 2rem;
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--text);
+            font-size: 1.5rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-20px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-10px) translateX(-50%);
+            }
+        }
+
+        /* Work Gallery */
+        #work {
+            background-color: var(--dark);
+            padding-top: 8rem;
+        }
+
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            letter-spacing: 3px;
+            margin-bottom: 3rem;
+            color: var(--accent);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            bottom: -10px;
+            left: 0;
+            background-color: var(--accent);
+        }
+
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .filter-btn {
+            background: none;
+            border: none;
+            color: var(--text);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            padding: 0.5rem 1.5rem;
+            margin: 0.5rem;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            color: var(--accent);
+        }
+
+        .filter-btn.active:after {
+            width: 100%;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background-color: var(--darker);
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .project-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            filter: grayscale(30%);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover .project-img {
+            filter: grayscale(0%);
+        }
+
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.5rem;
+            opacity: 1;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover .project-overlay {
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+        }
+
+        .project-category {
+            color: var(--accent);
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .project-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .waveform {
+            width: 100%;
+            height: 30px;
+            background-color: rgba(255, 255, 255, 0.1);
+            margin-top: 1rem;
+            border-radius: 3px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .waveform-bar {
+            position: absolute;
+            bottom: 0;
+            width: 4px;
+            background-color: var(--accent);
+            transition: height 0.3s ease;
+        }
+
+        /* About Page */
+        #about {
+            background-color: var(--darker);
+            padding-top: 8rem;
+        }
+
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            filter: grayscale(20%);
+            transition: all 0.3s ease;
+        }
+
+        .about-img:hover {
+            filter: grayscale(0%);
+            transform: scale(1.02);
+        }
+
+        .about-text h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .skills-container {
+            margin-top: 2rem;
+        }
+
+        .skill-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-name {
+            font-weight: 500;
+        }
+
+        .skill-percent {
+            color: var(--accent);
+        }
+
+        .skill-bar {
+            height: 6px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background-color: var(--accent);
+            border-radius: 3px;
+            width: 0;
+            transition: width 1.5s ease;
+        }
+
+        /* Contact Page */
+        #contact {
+            background-color: var(--dark);
+            padding-top: 8rem;
+            position: relative;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contact-info h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .contact-details {
+            margin-bottom: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--darker);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 1rem;
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+
+        .social-links {
+            display: flex;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--darker);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 1rem;
+            color: var(--text);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background-color: var(--accent);
+            color: var(--dark);
+            transform: translateY(-5px);
+        }
+
+        .contact-form {
+            background-color: var(--darker);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 4px;
+            color: var(--text);
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            background-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 0 2px var(--accent);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background-color: var(--accent);
+            color: var(--dark);
+            border: none;
+            padding: 0.8rem 2rem;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: transparent;
+            color: var(--accent);
+            box-shadow: 0 0 0 2px var(--accent);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--black);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .footer-text {
+            margin-bottom: 1rem;
+        }
+
+        .back-to-top {
+            color: var(--accent);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .lightbox.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .lightbox-content {
+            background-color: var(--darker);
+            width: 80%;
+            max-width: 1000px;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .lightbox.active .lightbox-content {
+            transform: scale(1);
+        }
+
+        .lightbox-img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .lightbox-close:hover {
+            background-color: var(--accent);
+            color: var(--dark);
+        }
+
+        .lightbox-info {
+            padding: 2rem;
+        }
+
+        .lightbox-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .lightbox-category {
+            display: inline-block;
+            background-color: var(--accent);
+            color: var(--dark);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+
+        .lightbox-desc {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .lightbox-audio {
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .about-container, .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .about-img {
+                max-width: 100%;
+            }
+
+            .landing-content h1 {
+                font-size: 4rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: 70%;
+                background-color: var(--darker);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: right 0.5s ease;
+                z-index: 1000;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                margin: 1.5rem 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hamburger.active div:nth-child(1) {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+
+            .hamburger.active div:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active div:nth-child(3) {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+
+            .landing-content h1 {
+                font-size: 3rem;
+            }
+
+            .landing-content h2 {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-container {
+                padding: 1rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            section {
+                padding: 5rem 1rem;
+            }
+
+            .lightbox-content {
+                width: 95%;
+            }
+
+            .lightbox-img {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Particle.js Background -->
+    <div id="particles-js"></div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+
+    <!-- Navigation -->
+    <nav class="nav-container">
+        <a href="#" class="logo">SOUND BWOY</a>
+        <div class="hamburger">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#landing">Home</a></li>
+            <li><a href="#work">Work</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Landing Page -->
+    <section id="landing">
+        <div class="landing-content">
+            <h1>KYLION BUCK</h1>
+            <h2>SOUND ENGINEER</h2>
+        </div>
+        <a href="#work" class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </a>
+    </section>
+
+    <!-- Work Gallery -->
+    <section id="work">
+        <h2 class="section-title">MY WORK</h2>
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="film">Film</button>
+            <button class="filter-btn" data-filter="game">Games</button>
+            <button class="filter-btn" data-filter="field">Field Recording</button>
+            <button class="filter-btn" data-filter="design">Sound Design</button>
+        </div>
+        <div class="projects-grid">
+            <!-- Project 1 -->
+            <div class="project-card" data-category="film">
+                <img src="https://source.unsplash.com/random/600x400/?movie" alt="Film Project" class="project-img">
+                <div class="project-overlay">
+                    <span class="project-category">Film</span>
+                    <h3 class="project-title">SHADOW REALM</h3>
+                    <div class="waveform" id="waveform-1">
+                        <!-- Waveform bars will be generated by JS -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 2 -->
+            <div class="project-card" data-category="game">
+                <img src="https://source.unsplash.com/random/600x400/?videogame" alt="Game Project" class="project-img">
+                <div class="project-overlay">
+                    <span class="project-category">Game</span>
+                    <h3 class="project-title">CYBER GHOST</h3>
+                    <div class="waveform" id="waveform-2">
+                        <!-- Waveform bars will be generated by JS -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 3 -->
+            <div class="project-card" data-category="field">
+                <img src="https://source.unsplash.com/random/600x400/?nature" alt="Field Recording" class="project-img">
+                <div class="project-overlay">
+                    <span class="project-category">Field Recording</span>
+                    <h3 class="project-title">URBAN ECHOES</h3>
+                    <div class="waveform" id="waveform-3">
+                        <!-- Waveform bars will be generated by JS -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 4 -->
+            <div class="project-card" data-category="design">
+                <img src="https://source.unsplash.com/random/600x400/?studio" alt="Sound Design" class="project-img">
+                <div class="project-overlay">
+                    <span class="project-category">Sound Design</span>
+                    <h3 class="project-title">SYNTHETIC DREAMS</h3>
+                    <div class="waveform" id="waveform-4">
+                        <!-- Waveform bars will be generated by JS -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 5 -->
+            <div class="project-card" data-category="film">
+                <img src="https://source.unsplash.com/random/600x400/?horror" alt="Film Project" class="project-img">
+                <div class="project-overlay">
+                    <span class="project-category">Film</span>
+                    <h3 class="project-title">NOCTURNE</h3>
+                    <div class="waveform" id="waveform-5">
+                        <!-- Waveform bars will be generated by JS -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 6 -->
+            <div class="project-card" data-category="game">
+                <img src="https://source.unsplash.com/random/600x400/?scifi" alt="Game Project" class="project-img">
+                <div class="project-overlay">
+                    <span class="project-category">Game</span>
+                    <h3 class="project-title">VOID RUNNER</h3>
+                    <div class="waveform" id="waveform-6">
+                        <!-- Waveform bars will be generated by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Page -->
+    <section id="about">
+        <h2 class="section-title">ABOUT ME</h2>
+        <div class="about-container">
+            <div class="about-img-container">
+                <img src="https://source.unsplash.com/random/600x800/?sound-engineer" alt="Sound Engineer" class="about-img">
+            </div>
+            <div class="about-text">
+                <h3>SOUND ENGINEER & AUDIO TECHNICIAN</h3>
+                <p>With over 5 of experience in the audio industry, I specialize in creating immersive soundscapes that transport listeners to other worlds. My work spans feature films, short form content and experimental audio installations.</p>
+                <p>I approach sound as a living entity, carefully crafting each element to serve the narrative and emotional core of the project. From the subtle rustle of leaves to earth-shaking explosions, every sound tells a story.</p>
+                
+                <div class="skills-container">
+                    <h3>MY SKILLS</h3>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">Sound Design</span>
+                            <span class="skill-percent">95%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="95"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">Field Recording</span>
+                            <span class="skill-percent">90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="90"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">Mixing & Mastering</span>
+                            <span class="skill-percent">85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="85"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">Soune Engineering</span>
+                            <span class="skill-percent">88%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="88"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Page -->
+    <section id="contact">
+        <h2 class="section-title">CONTACT</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>LET'S CREATE SOMETHING AMAZING</h3>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <span>me@kylion.co.uk</span>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <span></span>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <span>London, United Kingdom</span>
+                    </div>
+                </div>
+                <h3>FOLLOW ME</h3>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-soundcloud"></i></a>
+                </div>
+            </div>
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" class="form-control" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">SEND MESSAGE</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p class="footer-text">&copy; 2023 Kylion. All rights reserved.</p>
+        <a href="#landing" class="back-to-top">
+            <i class="fas fa-arrow-up"></i> BACK TO TOP
+        </a>
+    </footer>
+
+    <!-- Lightbox -->
+    <div class="lightbox">
+        <div class="lightbox-content">
+            <img src="" alt="Project Image" class="lightbox-img">
+            <div class="lightbox-close">
+                <i class="fas fa-times"></i>
+            </div>
+            <div class="lightbox-info">
+                <h3 class="lightbox-title">PROJECT TITLE</h3>
+                <span class="lightbox-category">CATEGORY</span>
+                <p class="lightbox-desc">Project description goes here with details about the sound design process, challenges, and solutions.</p>
+                <audio controls class="lightbox-audio">
+                    <source src="" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+    <script>
+        // Particle.js Initialization
+        document.addEventListener('DOMContentLoaded', function() {
+            particlesJS('particles-js', {
+                "particles": {
+                    "number": {
+                        "value": 150,
+                        "density": {
+                            "enable": true,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": "#00FF9D"
+                    },
+                    "shape": {
+                        "type": "circle",
+                        "stroke": {
+                            "width": 0,
+                            "color": "#000000"
+                        },
+                        "polygon": {
+                            "nb_sides": 5
+                        }
+                    },
+                    "opacity": {
+                        "value": 0.5,
+                        "random": true,
+                        "anim": {
+                            "enable": true,
+                            "speed": 1,
+                            "opacity_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "size": {
+                        "value": 3,
+                        "random": true,
+                        "anim": {
+                            "enable": true,
+                            "speed": 2,
+                            "size_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": "#00FF9D",
+                        "opacity": 0.2,
+                        "width": 1
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 1,
+                        "direction": "none",
+                        "random": true,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false,
+                        "attract": {
+                            "enable": true,
+                            "rotateX": 600,
+                            "rotateY": 1200
+                        }
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "grab"
+                        },
+                        "onclick": {
+                            "enable": true,
+                            "mode": "push"
+                        },
+                        "resize": true
+                    },
+                    "modes": {
+                        "grab": {
+                            "distance": 140,
+                            "line_linked": {
+                                "opacity": 1
+                            }
+                        },
+                        "bubble": {
+                            "distance": 400,
+                            "size": 40,
+                            "duration": 2,
+                            "opacity": 8,
+                            "speed": 3
+                        },
+                        "repulse": {
+                            "distance": 200,
+                            "duration": 0.4
+                        },
+                        "push": {
+                            "particles_nb": 4
+                        },
+                        "remove": {
+                            "particles_nb": 2
+                        }
+                    }
+                },
+                "retina_detect": true
+            });
+
+            // Custom Cursor
+            const cursor = document.querySelector('.cursor');
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.pageX + 'px';
+                cursor.style.top = e.pageY + 'px';
+            });
+
+            // Cursor hover effect
+            const hoverElements = document.querySelectorAll('a, button, .project-card');
+            hoverElements.forEach(el => {
+                el.addEventListener('mouseover', () => {
+                    cursor.classList.add('cursor-grow');
+                });
+                el.addEventListener('mouseout', () => {
+                    cursor.classList.remove('cursor-grow');
+                });
+            });
+
+            // Hamburger Menu
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+
+            // Close menu when clicking a link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                });
+            });
+
+            // Navbar scroll effect
+            window.addEventListener('scroll', () => {}) }
+        </script> 
+    </body>
+</html>
